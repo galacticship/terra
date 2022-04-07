@@ -1,0 +1,7 @@
+*.exe
+go.work
+.idea/
+cmd/
+Dockerfile
+Dockerfile.*
+.dockerignore
