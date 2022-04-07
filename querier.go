@@ -33,13 +33,17 @@ func WithChainId(chainId string) QuerierOption {
 	}
 }
 
-func NewQuerier(httpClient *http.Client, url string) *Querier {
-	return &Querier{
+func NewQuerier(httpClient *http.Client, url string, options ...QuerierOption) *Querier {
+	q := &Querier{
 		url:            url,
 		httpClient:     httpClient,
 		encodingConfig: terraappparams.MakeEncodingConfig(),
 		chainId:        "columbus-5",
 	}
+	for _, option := range options {
+		q = option(q)
+	}
+	return q
 }
 
 func (q Querier) ChainId() string {
