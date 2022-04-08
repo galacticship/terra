@@ -1,6 +1,8 @@
 package prism
 
 import (
+	"context"
+
 	"github.com/galacticship/terra"
 	"github.com/galacticship/terra/cosmos"
 	"github.com/pkg/errors"
@@ -19,6 +21,23 @@ func NewFarm(querier *terra.Querier) (*Farm, error) {
 	return &Farm{
 		c,
 	}, nil
+}
+
+func (f *Farm) WithdrawableRewards(ctx context.Context, address cosmos.AccAddress) (decimal.Decimal, error) {
+	var q struct {
+		VestingStatus struct {
+			StakerAddr string `json:"staker_addr"`
+		} `json:"vesting_status"`
+	}
+	q.VestingStatus.StakerAddr = address.String()
+	var r struct {
+		Withdrawable decimal.Decimal `json:"withdrawable"`
+	}
+	err := f.QueryStore(ctx, q, &r)
+	if err != nil {
+		return decimal.Zero, errors.Wrap(err, "querying contract store")
+	}
+	return terra.PRISM.ValueFromTerra(r.Withdrawable), nil
 }
 
 func (f *Farm) NewBondMessage(sender cosmos.AccAddress, amount decimal.Decimal) (cosmos.Msg, error) {

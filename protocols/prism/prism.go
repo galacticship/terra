@@ -9,6 +9,7 @@ type Prism struct {
 	Amps         *Amps
 	YLUNAStaking *YLUNAStaking
 	Farm         *Farm
+	Governance   *Governance
 }
 
 func NewPrism(querier *terra.Querier) (*Prism, error) {
@@ -24,10 +25,14 @@ func NewPrism(querier *terra.Querier) (*Prism, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "creating farm")
 	}
-
+	gov, err := NewGovernance(querier)
+	if err != nil {
+		return nil, errors.Wrap(err, "creating governance")
+	}
 	return &Prism{
 		Amps:         amps,
 		YLUNAStaking: ylunastaking,
 		Farm:         farm,
+		Governance:   gov,
 	}, nil
 }
