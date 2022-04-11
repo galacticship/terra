@@ -59,6 +59,30 @@ func (m Market) BorrowerInfo(ctx context.Context, borrower cosmos.AccAddress) (B
 	}, nil
 }
 
+type EpochState struct {
+	ExchangeRate decimal.Decimal
+	AUSTSupply   decimal.Decimal
+}
+
+func (m Market) EpochState(ctx context.Context) (EpochState, error) {
+	var q struct {
+		EpochState struct{} `json:"epoch_state"`
+	}
+	type response struct {
+		ExchangeRate decimal.Decimal `json:"exchange_rate"`
+		AUSTSupply   decimal.Decimal `json:"aterra_supply"`
+	}
+	var r response
+	err := m.QueryStore(ctx, q, &r)
+	if err != nil {
+		return EpochState{}, errors.Wrap(err, "querying store")
+	}
+	return EpochState{
+		ExchangeRate: r.ExchangeRate,
+		AUSTSupply:   terra.AUST.ValueFromTerra(r.AUSTSupply),
+	}, nil
+}
+
 func (m Market) NewDepositUSTMessage(sender cosmos.AccAddress, amount decimal.Decimal) (cosmos.Msg, error) {
 	var q struct {
 		DepositStable struct{} `json:"deposit_stable"`
