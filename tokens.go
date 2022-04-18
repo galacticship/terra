@@ -51,6 +51,7 @@ var (
 	XSD, _      = NewCw20Token("terra1ln2z938phz0nc2wepxpzfkwp6ezn9yrz9zv9ep", "XSD", 8)
 	WHSD, _     = NewCw20Token("terra1ustvnmngueq0p4jd7gfnutgvdc6ujpsjhsjd02", "WHSD", 8)
 	XASTRO, _   = NewCw20Token("terra14lpnyzc9z4g3ugr4lhm8s4nle0tq8vcltkhzh7", "xASTRO", 6)
+	XMARS, _    = NewCw20Token("terra1a04v570f9cxp49mk06vjsm8axsswndpwwt67k4", "xMARS", 6)
 )
 
 var (
@@ -64,6 +65,7 @@ var (
 	ASTRO_ASTROUSTLP, _  = NewCw20Token("terra17n5sunn88hpy965mzvt3079fqx3rttnplg779g", "uLP", 6)
 	ASTRO_ASTROLUNALP, _ = NewCw20Token("terra1ryxkslm6p04q0nl046quwz8ctdd5llkjnaccpa", "uLP", 6)
 	ASTRO_LUNABLUNALP, _ = NewCw20Token("terra1htw7hm40ch0hacm8qpgd24sus4h0tq3hsseatl", "uLP", 6)
+	ASTRO_MARSXMARSLP, _ = NewCw20Token("terra1cxmdyn5srv8uwvhgz5ckqf28zf8c7uwyz08f2j", "uLP", 6)
 
 	TERRASWAP_LUNAUSTLP, _     = NewCw20Token("terra17dkr9rnmtmu7x4azrpupukvur2crnptyfvsrvr", "uLP", 6)
 	TERRASWAP_BLUNALUNALP, _   = NewCw20Token("terra1nuy34nwnsh53ygpc4xprlj263cztw7vc99leh2", "uLP", 6)

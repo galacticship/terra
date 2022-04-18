@@ -1,6 +1,8 @@
 package mars
 
 import (
+	"context"
+
 	"github.com/galacticship/terra"
 	"github.com/galacticship/terra/cosmos"
 	"github.com/pkg/errors"
@@ -26,4 +28,28 @@ func (g *Governance) NewStakeMessage(sender cosmos.AccAddress, amount decimal.De
 		Stake struct{} `json:"stake"`
 	}
 	return terra.MARS.NewMsgSendExecute(sender, g.Contract, amount, q)
+}
+
+func (g *Governance) XMARSperMARS(ctx context.Context) (decimal.Decimal, error) {
+	var q struct {
+		XMarsPerMars struct{} `json:"x_mars_per_mars"`
+	}
+	var r decimal.Decimal
+	err := g.QueryStore(ctx, q, &r)
+	if err != nil {
+		return decimal.Zero, errors.Wrap(err, "querying contract store")
+	}
+	return r, nil
+}
+
+func (g *Governance) MARSperXMARS(ctx context.Context) (decimal.Decimal, error) {
+	var q struct {
+		MarsPerXMars struct{} `json:"mars_per_x_mars"`
+	}
+	var r decimal.Decimal
+	err := g.QueryStore(ctx, q, &r)
+	if err != nil {
+		return decimal.Zero, errors.Wrap(err, "querying contract store")
+	}
+	return r, nil
 }

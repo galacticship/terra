@@ -56,6 +56,10 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "init LUNABLUNA pair")
 	}
+	MARSXMARS, err := NewStablePair(querier, "terra1dawj5mr2qt2nlurge30lfgjg6ly4ls99yeyd25", terra.MARS, terra.XMARS, terra.ASTRO_MARSXMARSLP)
+	if err != nil {
+		return nil, errors.Wrap(err, "init MARSXMARS pair")
+	}
 
 	r.SetPairs(
 		LUNAUST,
@@ -68,6 +72,7 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 		ASTROUST,
 		ASTROLUNA,
 		LUNABLUNA,
+		MARSXMARS,
 		//{terra.VKR, terra.UST},
 		//{terra.APOLLO, terra.UST},
 		//{terra.ORION, terra.UST},
