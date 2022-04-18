@@ -183,6 +183,10 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "init NLUNAPSI pair")
 	}
+	XASTROASTRO, err := NewPair(querier, "terra14q2h9nce4spj8n74g6kppj3yf86qx8hsrqngfh", terra.XASTRO, terra.ASTRO, terra.TERRASWAP_XASTROASTROLP)
+	if err != nil {
+		return nil, errors.Wrap(err, "init NLUNAPSI pair")
+	}
 
 	r.SetPairs(
 		LUNAUST,
@@ -227,6 +231,7 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 		WHSDUST,
 		PRISMUST,
 		NLUNAPSI,
+		XASTROASTRO,
 	)
 
 	return &Router{r}, nil

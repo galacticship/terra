@@ -14,7 +14,6 @@ var (
 	PRISM, _    = NewCw20Token("terra1dh9478k2qvqhqeajhn75a2a7dsnf74y5ukregw", "PRISM", 6)
 	CLUNA, _    = NewCw20Token("terra13zaagrrrxj47qjwczsczujlvnnntde7fdt0mau", "cLUNA", 6)
 	ASTRO, _    = NewCw20Token("terra1xj49zyqrwpv5k928jwfpfy2ha668nwdgkwlrg3", "ASTRO", 6)
-	XASTRO, _   = NewCw20Token("terra1f68wt2ch3cx2g62dxtc8v68mkdh5wchdgdjwz7", "xASTRO", 6)
 	APOLLO, _   = NewCw20Token("terra100yeqvww74h4yaejj6h733thgcafdaukjtw397", "APOLLO", 6)
 	ANC, _      = NewCw20Token("terra14z56l0fp2lsf86zy3hty2z47ezkhnthtr9yq76", "ANC", 6)
 	BLUNA, _    = NewCw20Token("terra1kc87mu460fwkqte29rquh4hc20m54fxwtsx7gp", "bLUNA", 6)
@@ -51,6 +50,7 @@ var (
 	ROBO, _     = NewCw20Token("terra1f62tqesptvmhtzr8sudru00gsdtdz24srgm7wp", "ROBO", 6)
 	XSD, _      = NewCw20Token("terra1ln2z938phz0nc2wepxpzfkwp6ezn9yrz9zv9ep", "XSD", 8)
 	WHSD, _     = NewCw20Token("terra1ustvnmngueq0p4jd7gfnutgvdc6ujpsjhsjd02", "WHSD", 8)
+	XASTRO, _   = NewCw20Token("terra14lpnyzc9z4g3ugr4lhm8s4nle0tq8vcltkhzh7", "xASTRO", 6)
 )
 
 var (
@@ -107,6 +107,7 @@ var (
 	TERRASWAP_XSDWHSDLP, _     = NewCw20Token("terra1z0vaks4wkehncztu2a3j2z4fj2gjsnyk2ng9xu", "uLP", 6)
 	TERRASWAP_WHSDUSTLP, _     = NewCw20Token("terra13m7t5z9zvx2phtpa0k6lxht3qtjjhj68u0t0jz", "uLP", 6)
 	TERRASWAP_NLUNAPSILP, _    = NewCw20Token("terra1tuw46dwfvahpcwf3ulempzsn9a0vhazut87zec", "uLP", 6)
+	TERRASWAP_XASTROASTROLP, _ = NewCw20Token("terra1h5egnh0uu4qcjx359fgr5jfytjsazsynhm7lw7", "uLP", 6)
 
 	PRISM_PRISMUSTLP, _    = NewCw20Token("terra1wkv9htanake4yerrrjz8p5n40lyrjg9md28tg3", "uLP", 6)
 	PRISM_PRISMLUNALP, _   = NewCw20Token("terra1af7hyx4ek8vqr8asmtujsyv7s3z6py3jgtsgh8", "uLP", 6)
