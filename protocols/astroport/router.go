@@ -51,6 +51,10 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "init ASTROLUNA pair")
 	}
+	PRISMUST, err := NewXykPair(querier, "terra10nfk6fcz5nc5uru964qmpels9ctg6j0vczjgl7", terra.PRISM, terra.UST, terra.ASTRO_PRISMUSTLP)
+	if err != nil {
+		return nil, errors.Wrap(err, "init ASTROLUNA pair")
+	}
 
 	LUNABLUNA, err := NewStablePair(querier, "terra1j66jatn3k50hjtg2xemnjm8s7y8dws9xqa5y8w", terra.LUNA, terra.BLUNA, terra.ASTRO_LUNABLUNALP)
 	if err != nil {
@@ -59,6 +63,14 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 	MARSXMARS, err := NewStablePair(querier, "terra1dawj5mr2qt2nlurge30lfgjg6ly4ls99yeyd25", terra.MARS, terra.XMARS, terra.ASTRO_MARSXMARSLP)
 	if err != nil {
 		return nil, errors.Wrap(err, "init MARSXMARS pair")
+	}
+	KUSTUST, err := NewStablePair(querier, "terra15rx5ghq4nxrv62fqvdvm78kuasfkl95c6mcmqs", terra.KUST, terra.UST, terra.ASTRO_KUSTUSTLP)
+	if err != nil {
+		return nil, errors.Wrap(err, "init KUSTUST pair")
+	}
+	PRISMXPRISM, err := NewStablePair(querier, "terra1c868juk7lk9vuvetf0644qgxscsu4xwag6yaxs", terra.PRISM, terra.XPRISM, terra.ASTRO_PRISMXPRISMLP)
+	if err != nil {
+		return nil, errors.Wrap(err, "init KUSTUST pair")
 	}
 
 	r.SetPairs(
@@ -73,6 +85,9 @@ func NewRouter(querier *terra.Querier) (terra.Router, error) {
 		ASTROLUNA,
 		LUNABLUNA,
 		MARSXMARS,
+		KUSTUST,
+		PRISMUST,
+		PRISMXPRISM,
 		//{terra.VKR, terra.UST},
 		//{terra.APOLLO, terra.UST},
 		//{terra.ORION, terra.UST},
