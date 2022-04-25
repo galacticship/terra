@@ -70,6 +70,7 @@ var (
 	ASTRO_KUSTUSTLP, _     = NewCw20Token("terra16aurvlp5xctv0ftcelaseypyc89ylf4y0s5q0y", "uLP", 6)
 	ASTRO_PRISMUSTLP, _    = NewCw20Token("terra156sdvmjkezv5yxpgcxug0s73zkvdqk72pldkva", "uLP", 6)
 	ASTRO_PRISMXPRISMLP, _ = NewCw20Token("terra198en0xuzldzyark7pqz409p3u2d2g3y3k8u3py", "uLP", 6)
+	ASTRO_YLUNALUNALP, _   = NewCw20Token("terra12kf0s56pz2xhus9cqs4wva2xgz8wdkuqmh396s", "uLP", 6)
 
 	TERRASWAP_LUNAUSTLP, _     = NewCw20Token("terra17dkr9rnmtmu7x4azrpupukvur2crnptyfvsrvr", "uLP", 6)
 	TERRASWAP_BLUNALUNALP, _   = NewCw20Token("terra1nuy34nwnsh53ygpc4xprlj263cztw7vc99leh2", "uLP", 6)
