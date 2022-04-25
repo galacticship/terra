@@ -3,9 +3,8 @@ package deviantfactions
 import (
 	"context"
 
-	"github.com/galacticship/terra/cosmos"
-
 	"github.com/galacticship/terra"
+	"github.com/galacticship/terra/cosmos"
 	"github.com/pkg/errors"
 	"github.com/shopspring/decimal"
 )
@@ -32,6 +31,43 @@ type Listing struct {
 	Price        decimal.Decimal
 	BlockCreated int64
 	BlockExpires int64
+}
+
+func (m *Market) AllCollections(ctx context.Context) ([]string, error) {
+	var res []string
+	startAfter := ""
+	for {
+		tmp, err := m.allCollectionsPage(ctx, 30, startAfter)
+		if err != nil {
+			return nil, errors.Wrapf(err, "getting page with startafter %s", startAfter)
+		}
+		res = append(res, tmp...)
+		if len(tmp) < 30 {
+			break
+		}
+		startAfter = tmp[len(tmp)-1]
+	}
+	return res, nil
+}
+
+func (m *Market) allCollectionsPage(ctx context.Context, limit int, startAfter string) ([]string, error) {
+	var q struct {
+		AllCollections struct {
+			Limit      int    `json:"limit"`
+			StartAfter string `json:"start_after"`
+		} `json:"all_collections"`
+	}
+	q.AllCollections.Limit = limit
+	q.AllCollections.StartAfter = startAfter
+	var r struct {
+		Collections []string `json:"collections"`
+	}
+	err := m.QueryStore(ctx, q, &r)
+	if err != nil {
+		return nil, errors.Wrap(err, "querying contract store")
+	}
+
+	return r.Collections, nil
 }
 
 func (m *Market) AllListedTokens(ctx context.Context, collectionIds []string) ([]Listing, error) {
@@ -194,4 +230,14 @@ func (m *Market) NewListTokenMessage(sender cosmos.AccAddress, tokenId string, A
 	q.ListToken.Ask.Amount = AskToken.ValueToTerra(AskPrice)
 	q.ListToken.BlocksToListFor = BlocksToListFor
 	return m.NewMsgExecuteContract(sender, q)
+}
+
+func (m *Market) NewBuyTokenMessage(sender cosmos.AccAddress, tokenId string, token terra.NativeToken, price decimal.Decimal) (cosmos.Msg, error) {
+	var q struct {
+		BuyToken struct {
+			TokenId string `json:"token_id"`
+		} `json:"buy_token"`
+	}
+	q.BuyToken.TokenId = tokenId
+	return token.NewMsgSendExecute(sender, m.Contract, price, q)
 }
