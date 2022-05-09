@@ -40,6 +40,23 @@ func (f *Farm) WithdrawableRewards(ctx context.Context, address cosmos.AccAddres
 	return terra.PRISM.ValueFromTerra(r.Withdrawable), nil
 }
 
+func (f *Farm) BondAmount(ctx context.Context, address cosmos.AccAddress) (decimal.Decimal, error) {
+	var q struct {
+		RewardInfo struct {
+			StakerAddr string `json:"staker_addr"`
+		} `json:"reward_info"`
+	}
+	q.RewardInfo.StakerAddr = address.String()
+	var r struct {
+		BondAmount decimal.Decimal `json:"bond_amount"`
+	}
+	err := f.QueryStore(ctx, q, &r)
+	if err != nil {
+		return decimal.Zero, errors.Wrap(err, "querying contract store")
+	}
+	return terra.YLUNA.ValueFromTerra(r.BondAmount), nil
+}
+
 func (f *Farm) NewBondMessage(sender cosmos.AccAddress, amount decimal.Decimal) (cosmos.Msg, error) {
 	var q struct {
 		Bond struct{} `json:"bond"`
